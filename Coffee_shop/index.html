@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copper Cup Coffee</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6efe8;
+      color: #2f241f;
+      line-height: 1.5;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(49, 34, 27, 0.96);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff7f2;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #d6a56b, #8a5a32);
+      color: #2f241f;
+      font-weight: bold;
+    }
+
+    .brand-text h2 {
+      font-size: 20px;
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d9c0ad;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #f3dfd2;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .nav-cart {
+      background: #d6a56b;
+      color: #2f241f;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #3b2a22, #6b4a3a);
+      color: #fff7f2;
+      padding: 90px 20px 80px;
+    }
+
+    .hero-container,
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      margin-bottom: 20px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 58px;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: 18px;
+      color: #f3dfd2;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: #d6a56b;
+      color: #2f241f;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff7f2;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+    }
+
+    .brochure-section,
+    .shop-section {
+      padding: 80px 20px;
+    }
+
+    .brochure-section {
+      background: #fffaf6;
+    }
+
+    .shop-section {
+      background: #efe2d4;
+    }
+
+    .section-title {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .section-text {
+      max-width: 760px;
+      color: #6c5549;
+      margin-bottom: 38px;
+      font-size: 18px;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .highlight-card,
+    .product-card,
+    .cart-panel {
+      background: #fffaf5;
+      border: 1px solid #e4d3c5;
+      border-radius: 24px;
+      box-shadow: 0 10px 24px rgba(59, 42, 34, 0.08);
+    }
+
+    .highlight-card {
+      padding: 24px;
+    }
+
+    .shop-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 340px));
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .product-card {
+      overflow: visible;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 22px;
+    }
+
+    .product-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .product-body h3 {
+      font-size: 24px;
+    }
+
+    .price {
+      color: #6f4d36;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .product-body p {
+      color: #6c5549;
+      margin-bottom: 18px;
+    }
+
+    .product-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 6px 10px;
+      background: #f1e2d3;
+      border-radius: 999px;
+      color: #6f4d36;
+    }
+
+    .product-options {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .option-group {
+      position: relative;
+    }
+
+    .option-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      color: #5a3d2f;
+      margin-bottom: 6px;
+    }
+
+    .option-group select {
+      width: 100%;
+      border: 1px solid #d8c3b2;
+      border-radius: 999px;
+      background: #ffffff;
+      padding: 12px 14px;
+      color: #2f241f;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #8a5a32 50%), linear-gradient(135deg, #8a5a32 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .option-group select:focus {
+      outline: none;
+      border-color: #b78357;
+      box-shadow: 0 0 0 3px rgba(214, 165, 107, 0.18);
+    }
+
+    .extras-panel {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      z-index: 20;
+      padding: 12px 14px;
+      border: 1px solid #d8c3b2;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 14px 28px rgba(59, 42, 34, 0.14);
+    }
+
+    .extras-panel.show {
+      display: grid;
+      gap: 8px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #5f4639;
+    }
+
+    .checkbox-item input {
+      accent-color: #6f4d36;
+    }
+
+    .cart-item-details {
+      font-size: 13px;
+      color: #6c5549;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .add-button,
+    .checkout-button,
+    .clear-button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    .add-button {
+      width: 100%;
+      padding: 13px 18px;
+      background: #5a3d2f;
+      color: #fff7f2;
+    }
+
+    .cart-panel {
+      position: sticky;
+      top: 92px;
+      padding: 22px;
+    }
+
+    .cart-panel h3 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .previous-order-card {
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 20px;
+      background: #f3e4d5;
+      border: 1px solid #e0cdbd;
+    }
+
+    .previous-order-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #5a3d2f;
+    }
+
+    .previous-order-card p {
+      font-size: 14px;
+      color: #6c5549;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .previous-order-button {
+      width: 100%;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #5a3d2f;
+      color: #fff7f2;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-subtext {
+      color: #6c5549;
+      margin-bottom: 18px;
+    }
+
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+      min-height: 120px;
+    }
+
+    .cart-item,
+    .cart-empty {
+      padding: 14px;
+      border-radius: 18px;
+      background: #f6ece2;
+      border: 1px solid #ead9ca;
+    }
+
+    .cart-item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-controls button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: #5a3d2f;
+      color: white;
+      cursor: pointer;
+    }
+
+    .remove-link {
+      background: none;
+      border: none;
+      color: #6f4d36;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-summary {
+      border-top: 1px solid #e3d2c3;
+      padding-top: 16px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 14px 18px;
+      background: #d6a56b;
+      color: #2f241f;
+      margin-top: 8px;
+    }
+
+    .clear-button {
+      width: 100%;
+      padding: 12px 18px;
+      background: transparent;
+      color: #5a3d2f;
+      border: 1px solid #cfb9a7;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .navbar-container,
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .hero-grid,
+      .shop-layout,
+      .highlights,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .cart-panel {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a class="brand" href="#top">
+        <div class="brand-mark">C</div>
+        <div class="brand-text">
+          <h2>Copper Cup</h2>
+          <span>Roasters & Café</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">Our Story</a>
+        <a href="#shop">Menu</a>
+        <a href="#shop">Order Online</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="nav-cart" onclick="scrollToCart()">Cart (<span id="navCartCount">0</span>)</button>
+    </div>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="hero-container hero-grid">
+      <div>
+        <div class="badge">Fresh coffee, made to order</div>
+        <h1>Warm coffeehouse vibes with drinks your customers can add to cart.</h1>
+        <p>
+          Use the top half of the page like a brochure for your coffee shop story, brand, and signature quality. Then let customers browse drinks and add their favorites to cart below.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn-primary" href="#shop">Order a Drink</a>
+          <a class="btn-secondary" href="#about">Read Our Story</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Small-batch coffee. Big flavor.</h3>
+        <p>
+          Feature your café atmosphere, roasting style, specialty drinks, seasonal menu, or local story here. This section helps people connect with your brand before they order.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="brochure-section" id="about">
+    <div class="section-container">
+      <h2 class="section-title">A coffee site that sells the experience</h2>
+      <p class="section-text">
+        This brochure area is perfect for your shop’s story, featured roasts, daily specials, customer favorites, and anything that makes your coffee business stand out.
+      </p>
+
+      <div class="highlights">
+        <div class="highlight-card">
+          <h3>Freshly crafted</h3>
+          <p>Show off the care behind your beans, espresso, and hand-made drinks.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Built for ordering</h3>
+          <p>Customers can move from your story straight to drinks they can add to cart.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Perfect for cafés</h3>
+          <p>Designed for coffee shops, drink menus, local brands, and pickup-friendly ordering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-section" id="shop">
+    <div class="section-container">
+      <h2 class="section-title">Order your favorites</h2>
+      <p class="section-text">
+        Each menu card below represents a coffee beverage and gives customers the option to add it to cart.
+      </p>
+
+      <div class="shop-layout">
+        <div class="product-grid" id="productGrid"></div>
+
+        <aside class="cart-panel" id="cartPanel">
+        <h3>Your Cart</h3>
+        <div class="previous-order-card" id="previousOrderCard">
+          <h4>Want your previous order?</h4>
+          <p id="previousOrderText">Reorder your usual drink with one click.</p>
+          <button class="previous-order-button" id="previousOrderButton" onclick="reorderPrevious()">Reorder Previous Drink</button>
+        </div>
+        <p class="cart-subtext">Review your drinks before checkout.</p>
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Items</span>
+            <strong id="itemCount">0</strong>
+          </div>
+          <div class="summary-row">
+            <span>Total</span>
+            <strong id="cartTotal">$0.00</strong>
+          </div>
+          <button class="checkout-button" onclick="savePreviousOrder()">Proceed to Checkout</button>
+          <button class="clear-button" onclick="clearCart()">Clear Cart</button>
+        </div>
+      </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="brochure-section" id="contact">
+    <div class="section-container">
+      <h2 class="section-title">Visit or contact Copper Cup</h2>
+      <p class="section-text">
+        Add your address, hours, phone number, pickup details, or contact form here.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "Caramel Latte",
+        price: 5.75,
+        description: "Smooth espresso with steamed milk and rich caramel.",
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Espresso", "Sweet", "Hot"]
+      },
+      {
+        id: 2,
+        name: "Vanilla Cold Brew",
+        price: 5.25,
+        description: "Cold-steeped coffee finished with vanilla cream.",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Cold Brew", "Creamy", "Iced"]
+      },
+      {
+        id: 3,
+        name: "Mocha Supreme",
+        price: 6.25,
+        description: "Chocolate, espresso, and velvety milk topped with foam.",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Mocha", "Chocolate", "Hot"]
+      },
+      {
+        id: 4,
+        name: "Honey Cinnamon Cappuccino",
+        price: 5.95,
+        description: "A warm cappuccino with honey sweetness and cinnamon spice.",
+        image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Cappuccino", "Spiced", "Hot"]
+      },
+      {
+        id: 5,
+        name: "Iced Americano",
+        price: 4.50,
+        description: "Bold espresso poured over ice for a clean coffee kick.",
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Bold", "Iced", "Classic"]
+      },
+      {
+        id: 6,
+        name: "Hazelnut Macchiato",
+        price: 6.10,
+        description: "Layered espresso drink with hazelnut flavor and milk foam.",
+        image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1200&q=80",
+        tags: ["Nutty", "Espresso", "Signature"]
+      }
+    ];
+
+    const sizeOptions = [
+      { label: "Small", value: "Small", price: 0 },
+      { label: "Medium", value: "Medium", price: 0.75 },
+      { label: "Large", value: "Large", price: 1.5 }
+    ];
+
+    const addonOptions = [
+      { label: "Easy Ice", value: "Easy Ice", price: 0 },
+      { label: "Extra Ice", value: "Extra Ice", price: 0 },
+      { label: "Caramel", value: "Caramel", price: 0.6 },
+      { label: "Vanilla", value: "Vanilla", price: 0.6 },
+      { label: "Hazelnut", value: "Hazelnut", price: 0.6 },
+      { label: "Oat Milk", value: "Oat Milk", price: 0.85 },
+      { label: "Almond Milk", value: "Almond Milk", price: 0.85 },
+      { label: "Whipped Cream", value: "Whipped Cream", price: 0.5 },
+      { label: "Extra Shot", value: "Extra Shot", price: 1.25 }
+    ];
+
+    const cart = [];
+    let previousOrder = null;
+
+    function formatPrice(value) {
+      return `$${value.toFixed(2)}`;
+    }
+
+    function renderProducts() {
+      const productGrid = document.getElementById("productGrid");
+      productGrid.innerHTML = products.map(product => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-body">
+            <div class="product-title-row">
+              <h3>${product.name}</h3>
+              <div class="price">${formatPrice(product.price)}</div>
+            </div>
+            <p>${product.description}</p>
+            <div class="product-meta">
+              ${product.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+            <div class="product-options">
+              <div class="option-group">
+                <label for="size-${product.id}">Choose a size</label>
+                <select id="size-${product.id}">
+                  ${sizeOptions.map(size => `<option value="${size.value}">${size.label}${size.price > 0 ? ` (+${formatPrice(size.price)})` : ""}</option>`).join("")}
+                </select>
+              </div>
+              <div class="option-group">
+                <label for="addon-toggle-${product.id}">Add extra</label>
+                <select id="addon-toggle-${product.id}" onchange="toggleExtras(${product.id})">
+                  <option value="">No Extra</option>
+                  <option value="show">Choose Extras</option>
+                </select>
+                <div class="extras-panel" id="extras-panel-${product.id}">
+                  ${addonOptions.map(addon => `
+                    <label class="checkbox-item">
+                      <input type="checkbox" name="addon-${product.id}" value="${addon.value}" />
+                      <span>${addon.label}${addon.price > 0 ? ` (+${formatPrice(addon.price)})` : ""}</span>
+                    </label>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+            <button class="add-button" onclick="addToCart(${product.id})">Add to Cart</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function addToCart(productId) {
+      const product = products.find(item => item.id === productId);
+      if (!product) return;
+
+      const sizeDropdown = document.getElementById(`size-${productId}`);
+      const extrasDropdown = document.getElementById(`addon-toggle-${productId}`);
+      const extrasPanel = document.getElementById(`extras-panel-${productId}`);
+      const selectedSizeValue = sizeDropdown.value;
+      const selectedSize = sizeOptions.find(size => size.value === selectedSizeValue) || sizeOptions[0];
+      const selectedAddons = Array.from(document.querySelectorAll(`input[name="addon-${productId}"]:checked`)).map(input => {
+        const addon = addonOptions.find(option => option.value === input.value);
+        return addon;
+      }).filter(Boolean);
+
+      const addonsKey = selectedAddons.map(addon => addon.value).sort().join("|");
+      const cartKey = `${productId}-${selectedSize.value}-${addonsKey}`;
+      const existingItem = cart.find(item => item.cartKey === cartKey);
+      const addonTotal = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+      const unitPrice = product.price + selectedSize.price + addonTotal;
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          ...product,
+          cartKey,
+          quantity: 1,
+          selectedSize: selectedSize.value,
+          selectedAddons,
+          unitPrice
+        });
+      }
+
+      sizeDropdown.value = "Small";
+      extrasDropdown.value = "";
+      extrasPanel.classList.remove("show");
+      extrasPanel.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+
+      renderCart();
+    }
+
+    function updateQuantity(cartKey, change) {
+      const item = cart.find(product => product.cartKey === cartKey);
+      if (!item) return;
+
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        removeFromCart(cartKey);
+        return;
+      }
+      renderCart();
+    }
+
+    function removeFromCart(cartKey) {
+      const index = cart.findIndex(item => item.cartKey === cartKey);
+      if (index !== -1) {
+        cart.splice(index, 1);
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      cart.length = 0;
+      renderCart();
+    }
+
+    function savePreviousOrder() {
+      if (cart.length === 0) return;
+
+      previousOrder = cart.map(item => ({
+        ...item,
+        selectedAddons: item.selectedAddons.map(addon => ({ ...addon }))
+      }));
+    }
+
+    function reorderPrevious() {
+      if (!previousOrder || previousOrder.length === 0) return;
+
+      previousOrder.forEach(savedItem => {
+        const existingItem = cart.find(item => item.cartKey === savedItem.cartKey);
+        if (existingItem) {
+          existingItem.quantity += savedItem.quantity;
+        } else {
+          cart.push({
+            ...savedItem,
+            selectedAddons: savedItem.selectedAddons.map(addon => ({ ...addon }))
+          });
+        }
+      });
+
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cartItems");
+      const itemCount = document.getElementById("itemCount");
+      const navCartCount = document.getElementById("navCartCount");
+      const cartTotal = document.getElementById("cartTotal");
+      const previousOrderText = document.getElementById("previousOrderText");
+      const previousOrderButton = document.getElementById("previousOrderButton");
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = `<div class="cart-empty">Your cart is empty. Add a coffee drink to get started.</div>`;
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-top">
+              <strong>${item.name}</strong>
+              <span>${formatPrice(item.unitPrice * item.quantity)}</span>
+            </div>
+            <div class="cart-item-details">
+              Size: ${item.selectedSize}<br>
+              Extras: ${item.selectedAddons.length ? item.selectedAddons.map(addon => addon.label).join(", ") : "None"}
+            </div>
+            <div class="cart-item-controls">
+              <div class="qty-controls">
+                <button onclick="updateQuantity('${item.cartKey}', -1)">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity('${item.cartKey}', 1)">+</button>
+              </div>
+              <button class="remove-link" onclick="removeFromCart('${item.cartKey}')">Remove</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (previousOrder && previousOrder.length > 0) {
+        const previousSummary = previousOrder
+          .map(item => `${item.quantity}x ${item.name} (${item.selectedSize})`)
+          .join(", ");
+        previousOrderText.textContent = previousSummary;
+        previousOrderButton.disabled = false;
+        previousOrderButton.style.opacity = "1";
+      } else {
+        previousOrderText.textContent = "Reorder your usual drink with one click.";
+        previousOrderButton.disabled = true;
+        previousOrderButton.style.opacity = "0.6";
+      }
+
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+
+      itemCount.textContent = totalItems;
+      navCartCount.textContent = totalItems;
+      cartTotal.textContent = formatPrice(totalPrice);
+    }
+
+    function toggleExtras(productId) {
+      const dropdown = document.getElementById(`addon-toggle-${productId}`);
+      const panel = document.getElementById(`extras-panel-${productId}`);
+      if (!dropdown || !panel) return;
+
+      const shouldShow = dropdown.value === "show";
+      panel.classList.toggle("show", shouldShow);
+
+      if (!shouldShow) {
+        panel.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+          checkbox.checked = false;
+        });
+      }
+    }
+
+    function scrollToCart() {
+      document.getElementById("cartPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
